@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include "object.h"
+#include "misc.h"
 struct location{
    const char *description;
    const char *tag;
@@ -9,16 +11,12 @@ struct location{
 };
 #define numberOfLocations(sizeof(locs)/sizeof(*locs))
 static unsigned locationOfPlayer=(0);
-void executeLook(const char *noun){if(noun!=NULL&&strcmp(noun,"around")==0){printf("You are in %s.\n", locs[locationOfPlayer].description);
-   }else{
+void executeLook(const char *noun){if(noun!=NULL&&strcmp(noun,"around")==0){printf("You are in %s.\n",player->location->description);
+   listObjectsAtLocation(player->location);}else{
       printf("I don't understand what you want to see.\n");
    }
-}void executeGo(const char *noun){unsigned i;
-   for(i=0;i<numberOfLocations;i++){if(noun!=NULL&&strcmp(noun,locs[i].tag)==0){if(i==locationOfPlayer){
-            printf("You are already there.\n");
-         }else{printf("Ok.\n");
-            locationOfPlayer=i;
-            executeLook("around");
-         }return;
-      }}printf("I don't understand where you want to go.\n");
+}void executeGo(const char *noun){OBJECT *obj=parseObject(noun);if(obj==NULL){
+   printf("I don't know where you want to go.\n");}else if(obj==player->location){
+   printf("You're already there.\n");}else{
+   printf("Ok.\n");player->location=obj;executeLook("around");}
 }
