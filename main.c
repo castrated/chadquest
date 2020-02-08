@@ -4,7 +4,7 @@
 #include "inventory.h"
 static char input[100];
 static int getInput(){
-  printf("\n--> ");
+  printf("\n⟹ ");
   return(fgets(input,sizeof(input),stdin)!=NULL);
 }static int parseAndExecute(){
   char *verb=strtok(input," \n");
