@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "match.h"
 #include "location.h"
 #include "inventory.h"
 #include "execute.h"
@@ -7,7 +8,7 @@ static char input[100];
 static int getInput(){
    printf("\n⟾ ");
    return fgets(input,sizeof(input),stdin)!=NULL;
-}static int parseAndExecute(){
+}static int parseAndExecute(input){
    char *verb=strtok(input," \n");
    char *noun=strtok(NULL,"\n");
    if(verb!=NULL){
