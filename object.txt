@@ -67,6 +67,21 @@ extern OBJECT objs[];
      details     "The entrance is just a narrow opening in a small outcrop.\n"
      textGo      "You walk into the cave.\n"
 
+- openDoorToCave
+     description "an open door to the north"
+     tags        "north", "door", "doorway"
+     destination cave
+     details     "The door is open.\n"
+     textGo      "You walk through the door into the cave.\n"
+
+- closedDoorToCave
+     description "a closed door to the north"
+     tags        "north", "door", "doorway"
+     location    backroom
+     prospect    cave
+     details     "The door is closed.\n"
+     textGo      "The door is closed.\n"
+
 - intoCaveBlocked
      condition{return guard->health>0&&silver->location!=guard;}
      description "a cave entrance to the east"
@@ -97,3 +112,23 @@ extern OBJECT objs[];
      location    cave
      details     "Carved in stone is a secret password 'abccb'.\n"
      textGo      "Solid rock is blocking the way.\n"
+
+- backroom
+     description "a backroom"
+     tags        "backroom"
+     details     "The room is dusty and messy.\n"
+
+- openDoorToBackroom
+     description "an open door to the south"
+     tags        "south", "door", "doorway"
+     destination backroom
+     details     "The door is open.\n"
+     textGo      "You walk through the door into the backroom.\n"
+
+- closedDoorToBackroom
+     description "a closed door to the south"
+     tags        "south", "door", "doorway"
+     location    cave
+     prospect    backroom
+     details     "The door is closed.\n"
+     textGo      "The door is closed.\n"
