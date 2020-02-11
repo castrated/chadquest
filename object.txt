@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "object.h"
+#include "toggle.h"
 typedef struct object{
    int(*condition)(struct object *);
    const char    *description;
@@ -13,6 +14,10 @@ typedef struct object{
    int            weight;
    int            capacity;
    int            health;
+   const char *(*open)(struct object *);
+   const char *(*close)(struct object *);
+   const char *(*lock)(struct object *);
+   const char *(*unlock)(struct object *);
 }OBJECT;
 extern OBJECT objs[];
 
@@ -36,7 +41,7 @@ extern OBJECT objs[];
 - gold
      description "a gold coin"
      tags        "gold","coin","gold coin"
-     location    cave
+     location    openBox
      details     "The shiny coin seems to be a rare and priceless artifact.\n"
      weight      1
 
@@ -66,6 +71,7 @@ extern OBJECT objs[];
      destination cave
      details     "The entrance is just a narrow opening in a small outcrop.\n"
      textGo      "You walk into the cave.\n"
+     open        isAlreadyOpen
 
 - openDoorToCave
      description "an open door to the north"
@@ -90,6 +96,7 @@ extern OBJECT objs[];
      prospect    cave
      detail      "The entrance is just a narrow opening in a small outcrop.\n"
      textGo      "The guard stops you from walking into the cave.\n"
+     open        isAlreadyOpen
 
 - exitCave
      description "a way out to the west"
@@ -98,6 +105,7 @@ extern OBJECT objs[];
      destination field
      details     "Sunlight pours in through an opening in the cave's wall.\n"
      textGo      "You walk out of the cave.\n"
+     open        isAlreadyOpen
 
 - wallField
      description "dense forest all around"
