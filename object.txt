@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "object.h"
-
 typedef struct object{
+   int(*condition)(struct object *);
    const char    *description;
    const char   **tags;
    struct object *location;
@@ -59,16 +59,16 @@ extern OBJECT objs[];
      capacity    20
 
 - intoCave
-     condition intoCaveIsOpen
+     condition   {return guard->health==0||silver->location==guard;}
      description "a cave entrance to the east"
-     tags        "east","entrance"
+     tags        "east", "entrance"
      location    field
      destination cave
      details     "The entrance is just a narrow opening in a small outcrop.\n"
      textGo      "You walk into the cave.\n"
 
 - intoCaveBlocked
-     condition   intoCaveIsClosed
+     condition{return guard->health>0&&silver->location!=guard;}
      description "a cave entrance to the east"
      tags        "east","entrance"
      location    field
