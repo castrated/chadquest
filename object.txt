@@ -59,11 +59,21 @@ extern OBJECT objs[];
      capacity    20
 
 - intoCave
+     condition intoCaveIsOpen
+     description "a cave entrance to the east"
+     tags        "east","entrance"
+     location    field
+     destination cave
+     details     "The entrance is just a narrow opening in a small outcrop.\n"
+     textGo      "You walk into the cave.\n"
+
+- intoCaveBlocked
+     condition   intoCaveIsClosed
      description "a cave entrance to the east"
      tags        "east","entrance"
      location    field
      prospect    cave
-     details     "The entrance is just a narrow opening in a small outcrop.\n"
+     detail      "The entrance is just a narrow opening in a small outcrop.\n"
      textGo      "The guard stops you from walking into the cave.\n"
 
 - exitCave
